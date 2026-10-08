@@ -14,7 +14,9 @@ public class Root : MonoBehaviour
     public Audio_Controller audio_Controller;
     public Debug_Controller debug_Controller;
     public UI_Controller ui_Controller;
-
+    
+    public Time_System time_System;
+    public News_System news_System;
 
      
     public static Root Instance { get; private set; }
@@ -26,12 +28,17 @@ public class Root : MonoBehaviour
             return;
         }
         Instance = this;
+        Debug.Log("Root Instance 初始化");
     }
 
 	private void Start() // 在此处触发各大系统的初始化
 	{
         data_Controller.Init_Data();
         ui_Controller.Init_UI();
+
+
+        time_System.StartTick();
+
 	}
 
     private void OnApplicationQuit() // 退出时存档

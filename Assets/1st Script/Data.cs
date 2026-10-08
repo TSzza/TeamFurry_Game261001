@@ -30,7 +30,7 @@ namespace Data
      ***/
 
 
-    public struct InterestTag // 兴趣标签，标示用户与新闻的兴趣点，配表
+    public class InterestTag // 兴趣标签，标示用户与新闻的兴趣点，配表
     {
         public int TagID;
         public string TagName;
@@ -39,7 +39,7 @@ namespace Data
             return string.IsNullOrWhiteSpace(TagName) ? "空Tag名" : TagName;
         }
     }
-    public struct WeightedTag // 带权标签
+    public class WeightedTag // 带权标签
     {
         public InterestTag Tag;
         public float Weight;
@@ -55,7 +55,7 @@ namespace Data
     }
 
     // 新闻
-    public struct News
+    public class News
     {
         public int NewsID;
         public string Title;
@@ -88,7 +88,7 @@ $@"== 新闻ID【{NewsID}】==
         }
     }
     // 评论
-    public struct Comment
+    public class Comment
     {
         public Peo Reviewer;
         public int Time;
@@ -98,12 +98,12 @@ $@"== 新闻ID【{NewsID}】==
 
 
     
-    public struct BehaviorTag // 行为标签，标示用户行为，例如转发、评论等，配表
+    public class BehaviorTag // 行为标签，标示用户行为，例如转发、评论等，配表
     {
         public int BehaviorID;
         public string BehaviorName;
     }
-    public struct WeightedBehavior // 带权行为标签
+    public class WeightedBehavior // 带权行为标签
     {
         public BehaviorTag Behavior;
         public float Weight;
@@ -111,7 +111,7 @@ $@"== 新闻ID【{NewsID}】==
 
 
     // 人
-    public struct Peo
+    public class Peo
     {
         public int PeoID;
         public string PeoName;
@@ -130,7 +130,7 @@ $@"== 新闻ID【{NewsID}】==
 
     // =========================================================
 
-    public struct SaveData
+    public class SaveData
     {
         public int screenWidth;
         public int screenHeight;

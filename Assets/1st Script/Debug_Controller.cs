@@ -2,15 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Debug_Controller : MonoBehaviour
 {
     // 控制Debug页面的可视化输出
 
-    // 支持 左右大屏幕 输入 / 清空 / 暂停
 
-    public Transform Content0,Content1;
+    // 鼠标射线检测
+    public bool DebugCheckMouse = false;
+	private void Update()
+	{
+		if (DebugCheckMouse||Input.GetMouseButtonDown(0))
+        {
+            // 检测是否点到UI（EventSystem）
+            PointerEventData pointerData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
+            List<RaycastResult> uiResults = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, uiResults);
+
+            if (uiResults.Count > 0)
+            {
+                var hit = uiResults[0];
+                Debug.Log($"【UI射线命中】物体：{hit.gameObject.name} | 父物体：{hit.gameObject.transform.parent.name} | 组件：{hit.gameObject.GetComponent<RectTransform>()}");
+            }
+        }
+	}
+
+
+
+	// Debug 大屏幕
+	// 支持 左右大屏幕 输入 / 清空 / 暂停
+
+	public Transform Content0,Content1;
     public TMP_Text DebugTextPrefab;
     private bool Pause0, Pause1;
     

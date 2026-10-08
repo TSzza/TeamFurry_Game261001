@@ -15,6 +15,8 @@ public class Data_Controller : MonoBehaviour
     public List<BehaviorTag> behaviorTags;
     public List<News> news;
     public List<Peo> peos;
+    public int newsID;
+    public int peosID;
 
     public void SetPersistentDataPath() { SavePath = Path.Combine(Application.persistentDataPath, "beastWave.save"); }
     string SavePath;
@@ -95,8 +97,9 @@ public class Data_Controller : MonoBehaviour
                 TagID = ID,
                 TagName = tagName
             });
-            Debug.Log($"InteresetTag - ({ID},{tagName})");
+            //Debug.Log($"InteresetTag - ({ID},{tagName})");
         }
+        Debug.Log($"InteresetTag表格已载入：{interestTags.Count}  | {interestTags}");
     }
     //public void Read_BehavoirTag(string filePath)
     //{
@@ -160,10 +163,9 @@ public class Data_Controller : MonoBehaviour
                 }
             }
             
-            int ID = newsList.Count; // ID其实就是下标
             News newsItem = new News
             {
-                NewsID = ID,
+                NewsID = newsID++,
                 Title = title,
                 MainBody = body,
                 Heat = heat,
@@ -171,9 +173,11 @@ public class Data_Controller : MonoBehaviour
             };
             newsList.Add(newsItem);
             
-            Debug.Log($"News - {newsItem}");
+            //Debug.Log($"News - {newsItem}");
 
         }
+        news = newsList;
+        Debug.Log($"News表格已载入，现有News：{news.Count}");
     }
 
 

@@ -16,15 +16,30 @@ public class UI_Controller : MonoBehaviour
 	// 切换界面：在此处发起请求，更换当前的显像摄像机； 开闭组件：由动画UI脚本自行处理； 数值控件：各UI自行处理
     
 
+
     // 摄像机相关
     public List<CameraEntry> cameraEntries;
     private Dictionary<int, Camera> cameraDict;
-    private int currentActiveCameraID;
+    private int currentActiveCameraID = -1;
 
     public int DefaultInitCamera = 0;
+
+    [Header("News")]
+    public ui_NewsDetailTable ui_NewsDetailTable;
+
+
 	public void Init_UI()
     {
+        // 相机相关
 
+        cameraDict = new Dictionary<int, Camera>();
+        foreach (var entry in cameraEntries)
+        {
+            if (entry.camera != null && !cameraDict.ContainsKey(entry.cameraId))
+            {
+                cameraDict.Add(entry.cameraId, entry.camera);
+            }
+        }
         SwitchCamera(DefaultInitCamera);
 
 
